@@ -9,7 +9,7 @@
     <h1>Here is all Your inventory</h1>
     <ul>
         <% inventories.forEach(inventory => { %>
-         <li><%= inventory.name  %></li>
+            <a href="/inventories/<%= inventory._id  %>"><li><%= inventory.name  %></li></a>
         <% }) %>
     </ul>
     <a href="/inventories/new">Add New Inventory</a>

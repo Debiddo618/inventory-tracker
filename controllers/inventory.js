@@ -21,6 +21,13 @@ router.post('/', async (req,res)=>{
     res.redirect('/inventories')
 })
 
+// show inventory by ID
+router.get('/:inventoryId',async (req,res)=>{
+    const foundInventory = await Inventory.findById(req.params.inventoryId).populate('owner');
+    res.render("inventories/show",{inventory:foundInventory});
+
+})
+
 
 
 
