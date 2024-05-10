@@ -23,7 +23,7 @@ router.post('/', async (req,res)=>{
 
 // show inventory by ID
 router.get('/:inventoryId',async (req,res)=>{
-    const foundInventory = await Inventory.findById(req.params.inventoryId).populate('owner');
+    const foundInventory = await Inventory.findById(req.params.inventoryId).populate('owner').populate('products');
     res.render("inventories/show",{inventory:foundInventory});
 })
 
@@ -45,6 +45,7 @@ router.put('/:inventoryId', async (req,res)=>{
 
 // Delete route
 router.delete('/:inventoryId', async (req, res) => {
+    // need to write the logic to delete all products
     await Inventory.findByIdAndDelete(req.params.inventoryId)
     res.redirect('/inventories');
 })

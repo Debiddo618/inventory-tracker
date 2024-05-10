@@ -1,5 +1,6 @@
 const models = require('../models/user.js');
 const Product = models.Product;
+const Inventory = models.Inventory;
 const express = require('express');
 const router = express.Router();
 
@@ -16,9 +17,20 @@ router.get('/new', async (req,res)=>{
 
 // create a new product
 router.post('/', async (req,res)=>{
-    req.body.owner = req.session.user._id
-    await Product.create(req.body)
-    res.redirect('/products')
+    req.body.owner = req.session.user._id;
+    const newProduct = await Product.create(req.body);
+
+    // logic to add product into the inventory
+
+    // find the inventory
+    const foundInventory = await Inventory.findById(req.body.inventory);
+    // console.log("The found Inventory is");
+    // console.log(foundInventory);
+    foundInventory.products.push(newProduct._id);
+
+    foundInventory.save();
+
+    res.redirect(`/inventories/${foundInventory._id}`);
 })
 
 // show inventory by ID

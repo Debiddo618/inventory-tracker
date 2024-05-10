@@ -27,6 +27,7 @@ const passUserToView = require('./middleware/pass-user-to-view.js');
 
 // using middleware
 app.use(morgan('dev'))
+app.use(express.static('public'));
 app.use(express.urlencoded({ extended: false }))
 app.use(methodOverride('_method'))
 app.use(session({
@@ -47,6 +48,7 @@ app.use('/auth', authController);
 app.use(isSignedIn);
 app.use('/inventories', inventoryController);
 app.use('/products', productController);
+
 
 
 // run express of port 3000

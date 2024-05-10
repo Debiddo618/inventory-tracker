@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/main.css">
     <title><%= inventory.name  %> Inventory</title>
 </head>
 <body>
-    <h1>Name: <%= inventory.name  %></h1>
+    <h1>Inventory: <%= inventory.name  %></h1>
     <h1>Owner: <%= inventory.owner.username  %></h1>
 
     <% if (inventory.owner._id.equals(user._id)) { %>
@@ -18,17 +19,97 @@
         </form>
 
         <!-- List of Products -->
-        <h1>Product List</h1>
-        <a href="">Add Product</a>
+        <div class="product-table-container">
+            <h1>Product List</h1>
+            <table>
+                <tr>
+                  <th>Name</th>
+                  <th>Description</th>
+                  <th>Amount</th>
+                  <th>Price</th>
+                  <th>Status</th>
+                  <th>Edit</th>
+                  <th>Delete</th>
+                </tr>
 
+                <% inventory.products.forEach(product => { %>
+                    <tr>
+                        <td><%= product.name  %></td>
+                        <td><%= product.description  %></td>
+                        <td><%= product.amount  %></td>
+                        <td><%= product.price  %></td>
+                        <td><%= product.status  %></td>
+                        <td>
+                            <a href="/products/<%= product._id  %>/edit">
+                                Edit
+                            </a>
+                        </td>
+                        <td>
+                            <form action="/products/<%= product._id %>?_method=DELETE">
+                                <button type="submit">
+                                    Delete
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
 
+                <% }) %>
+            </table>
+            <button onclick="handleClick()">Add a new Product</button>
+        </div>
 
+        <br>
 
+        <!-- Create Product Form -->
+        <div class="create-product-modal">
+            <h1>Creating a new product</h1>
+            <form action="/products" method="POST">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                <br>
+    
+                <label for="description">Description:</label>
+                <input type="text" id="description" name="description">
+                <br>
+    
+                <label for="amount">Amount:</label>
+                <input type="number" id="amount" name="amount" required>
+                <br>
 
+                <label for="price">Price:</label>
+                <input type="number" id="price" name="price">
+                <br>
+    
+                <label for="status">Status:</label>
+                <input type="text" id="status" name="status" required>
+                <br>
+    
+                <!-- Wont be able to see this since display is none -->
+                <input type="text" name="inventory" id="inventory" value="<%= inventory._id  %>">
+                <br>
+    
+                <button type="submit">Create Product</button>
+            </form>
+        </div>
+        <br>
+        
+        <!-- <a href="/products/new">Add Product</a> -->
+        <br>
     <% } else { %>
     <p>You don't own this, <%= inventory.owner.username %> does!</p>
     <% } %>
 
     <a href="/inventories">Back to All Inventory</a>
+    <script>
+        const createProductModal = document.getElementsByClassName('create-product-modal')[0];
+
+        const inventoryId = document.getElementById("inventory");
+
+        inventoryId.style.display = "none";
+
+        function handleClick(){
+            createProductModal.style.display = "inline-flex";
+        }
+    </script>
 </body>
 </html>
