@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Inventories</title>
+</head>
+<body>
+    <h1>Here is all Your inventory</h1>
+    <ul>
+        <% inventories.forEach(inventory => { %>
+         <li><%= inventory.name  %></li>
+        <% }) %>
+    </ul>
+    <a href="/inventories/new">Add New Inventory</a>
+</body>
+</html>

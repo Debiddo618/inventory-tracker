@@ -9,6 +9,7 @@
   <%- include('./partials/_navbar.ejs') %>
   <% if (user) { %>
     <h1>Welcome to Inventory Tracker, <%= user.username %>!</h1>
+    <a href="/inventories">Look at inventories</a>
     <p>
       <a href="/auth/sign-out">Sign out</a>
     </p>
