@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Inventory</title>
+</head>
+<body>
+        <h1>Editing a new inventory</h1>
+        <form action="/inventories/<%= inventory._id  %>?_method=PUT" method="POST">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" value="<%= inventory.name  %>">
+
+            <!-- implement product later -->
+            <button type="submit">Update Inventory</button>
+        </form>
+</body>
+</html>

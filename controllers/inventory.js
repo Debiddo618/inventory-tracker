@@ -25,7 +25,22 @@ router.post('/', async (req,res)=>{
 router.get('/:inventoryId',async (req,res)=>{
     const foundInventory = await Inventory.findById(req.params.inventoryId).populate('owner');
     res.render("inventories/show",{inventory:foundInventory});
+})
 
+// get edit form
+router.get('/:inventoryId/edit', async (req,res)=>{
+    const foundInventory = await Inventory.findById(req.params.inventoryId).populate('owner');
+    res.render("inventories/edit",{inventory:foundInventory});
+})
+
+// update inventory
+router.put('/:inventoryId', async (req,res)=>{
+    const newInventory = await Inventory.findByIdAndUpdate(
+        req.params.inventoryId,
+        req.body,
+        {new:true}
+    ).populate('owner');
+    res.render('inventories/show',{inventory:newInventory});
 })
 
 
