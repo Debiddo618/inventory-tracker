@@ -49,12 +49,4 @@ router.delete('/:inventoryId', async (req, res) => {
     res.redirect('/inventories');
 })
 
-
-
-
-
-
-
-
-
 module.exports = router;

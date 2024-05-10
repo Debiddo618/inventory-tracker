@@ -16,8 +16,19 @@
         <form action="/inventories/<%= inventory._id %>?_method=DELETE" method="POST">
             <button type="submit">Delete this inventory</button>
         </form>
+
+        <!-- List of Products -->
+        <h1>Product List</h1>
+        <a href="">Add Product</a>
+
+
+
+
+
     <% } else { %>
     <p>You don't own this, <%= inventory.owner.username %> does!</p>
     <% } %>
+
+    <a href="/inventories">Back to All Inventory</a>
 </body>
 </html>

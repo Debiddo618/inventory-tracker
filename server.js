@@ -19,6 +19,7 @@ mongoose.connection.on('connected', () => {
 // import controllers
 const authController = require('./controllers/auth.js');
 const inventoryController = require('./controllers/inventory.js');
+const productController = require('./controllers/product.js');
 
 // import custom middleware
 const isSignedIn = require('./middleware/is-signed-in.js');
@@ -45,6 +46,8 @@ app.get('/', (req, res) => {
 app.use('/auth', authController);
 app.use(isSignedIn);
 app.use('/inventories', inventoryController);
+app.use('/products', productController);
+
 
 // run express of port 3000
 app.listen(process.env.PORT, ()=>{
