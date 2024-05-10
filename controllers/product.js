@@ -27,4 +27,23 @@ router.get('/:productId',async (req,res)=>{
     res.render("products/show",{product:foundProduct});
 })
 
+// get edit form
+router.get('/:productId/edit', async (req,res)=>{
+    const foundProduct = await Product.findById(req.params.productId);
+    res.render("products/edit",{product:foundProduct});
+})
+
+// update product
+router.put('/:productId', async (req,res)=>{
+    const newProduct = await Product.findByIdAndUpdate(
+        req.params.productId,
+        req.body,
+        {new:true}
+    );
+    res.render('products/show',{product:newProduct});
+})
+
+
+
+
 module.exports = router;

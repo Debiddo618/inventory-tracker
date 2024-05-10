@@ -6,7 +6,7 @@
     <title>Edit Inventory</title>
 </head>
 <body>
-        <h1>Editing a new inventory</h1>
+        <h1>Editing Inventory</h1>
         <form action="/inventories/<%= inventory._id  %>?_method=PUT" method="POST">
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" value="<%= inventory.name  %>">
