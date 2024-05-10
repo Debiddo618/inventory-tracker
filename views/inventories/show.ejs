@@ -8,7 +8,16 @@
 <body>
     <h1>Name: <%= inventory.name  %></h1>
     <h1>Owner: <%= inventory.owner.username  %></h1>
-    <a href="/inventories/<%= inventory._id  %>/edit">Edit</a>
-    <a href="">Delete</a>
+
+    <% if (inventory.owner._id.equals(user._id)) { %>
+
+        <a href="/inventories/<%= inventory._id  %>/edit">Edit</a>
+
+        <form action="/inventories/<%= inventory._id %>?_method=DELETE" method="POST">
+            <button type="submit">Delete this inventory</button>
+        </form>
+    <% } else { %>
+    <p>You don't own this, <%= inventory.owner.username %> does!</p>
+    <% } %>
 </body>
 </html>

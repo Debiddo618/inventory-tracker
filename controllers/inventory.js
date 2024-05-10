@@ -43,6 +43,11 @@ router.put('/:inventoryId', async (req,res)=>{
     res.render('inventories/show',{inventory:newInventory});
 })
 
+// Delete route
+router.delete('/:inventoryId', async (req, res) => {
+    await Inventory.findByIdAndDelete(req.params.inventoryId)
+    res.redirect('/inventories');
+})
 
 
 
