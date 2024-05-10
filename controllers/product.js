@@ -21,6 +21,10 @@ router.post('/', async (req,res)=>{
     res.redirect('/products')
 })
 
-
+// show inventory by ID
+router.get('/:productId',async (req,res)=>{
+    const foundProduct = await Product.findById(req.params.productId);
+    res.render("products/show",{product:foundProduct});
+})
 
 module.exports = router;
