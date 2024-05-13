@@ -1,5 +1,6 @@
 const models = require('../models/user.js');
 const Inventory = models.Inventory;
+const Product = models.Product;
 const User = models.User;
 const express = require('express');
 const router = express.Router();
@@ -53,7 +54,17 @@ router.put('/:inventoryId', async (req,res)=>{
 
 // Delete route
 router.delete('/:inventoryId', async (req, res) => {
-    // need to write the logic to delete all products
+    // delete all products
+    const inventoryToDelete = await Inventory.findById(req.params.inventoryId);
+    for (const product of inventoryToDelete.products) {
+        await Product.findByIdAndDelete(product);
+    }
+
+    // delete the inventory
+    const currentUser = await User.findById(req.session.user._id);
+    currentUser.inventories = currentUser.inventories.filter(inventory => inventory != req.params.inventoryId);
+    currentUser.save();
+
     await Inventory.findByIdAndDelete(req.params.inventoryId)
     res.redirect('/inventories');
 })
