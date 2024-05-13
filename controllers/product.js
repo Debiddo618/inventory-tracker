@@ -57,6 +57,13 @@ router.put('/:productId', async (req,res)=>{
 
 // Delete route
 router.delete('/:productId/:inventoryId', async (req, res) => {
+    // remove product from inventory
+    const foundInventory = await Inventory.findById(req.params.inventoryId);
+    foundInventory.products = foundInventory.products.filter(product => product != req.params.productId);
+
+    await foundInventory.save();
+
+    // delete the product
     await Product.findByIdAndDelete(req.params.productId)
     res.redirect(`/inventories/${req.params.inventoryId}`);
 })
