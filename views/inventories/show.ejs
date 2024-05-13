@@ -45,7 +45,7 @@
                             </a>
                         </td>
                         <td>
-                            <form action="/products/<%= product._id %>?_method=DELETE">
+                            <form action="/products/<%= product._id %>/<%= inventory._id  %>?_method=DELETE" method="POST">
                                 <button type="submit">
                                     Delete
                                 </button>
