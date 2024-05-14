@@ -3,23 +3,66 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home Page</title>
+  <link rel="stylesheet" href="/styles/main.css">
+  <title>InventoryPro - Home Page</title>
 </head>
 <body>
   <%- include('./partials/_navbar.ejs') %>
-  <% if (user) { %>
-    <h1>Welcome to Inventory Tracker, <%= user.username %>!</h1>
-    <a href="/inventories">Look at inventories</a>
-    <a href="/products">Look at products</a>
-    <p>
-      <a href="/auth/sign-out">Sign out</a>
-    </p>
-  <% } else { %>
-    <h1>Welcome to the app, guest.</h1>
-    <p>
-      <a href="/auth/sign-up">Sign up</a> or
-      <a href="/auth/sign-in">Sign in</a>.
-    </p>
-  <% } %>
+  <div class="welcome-page">
+    <% if (user) { %>
+      <h1>Welcome to InventoryPro, <%= user.username %>!</h1>
+      <div class="image-slogan">
+        <img src="" alt="">
+        <div class="slogan">
+          Stay Organized, Track Effortlessly: Your Inventory, Your Control.
+        </div>
+      </div>
+    <% } else { %>
+      <div class="image-slogan">
+        <div class="slogan">
+          <div class="slogan-title">
+            Stay Organized, Track Effortlessly: Your Inventory, Your Control.
+          </div>
+          <div class="slogan-description">
+            Effortlessly manage your inventory. Stay organized, track stock levels, and streamline your operations hassle-free.
+          </div>
+          <div class="benefits">
+            <div class="benefit">
+              <div class="image">
+                <img src="/assets/check.svg" alt="">
+              </div>
+              <p>Quick and Easy Setup</p>
+            </div>
+  
+            <div class="benefit">
+              <div class="image">
+                <img src="/assets/check.svg" alt="">
+              </div>              
+              <p>Intuitive Interface</p>
+            </div>
+  
+            <div class="benefit">
+              <div class="image">
+                <img src="/assets/check.svg" alt="">
+              </div>              
+              <p>Accessibility from Anywhere</p>
+            </div>
+  
+            <div class="benefit">
+              <div class="image">
+                <img src="/assets/check.svg" alt="">
+              </div>
+              <p>Scalability and Flexibility</p>
+            </div>
+          </div>
+          <button class="button sign-up">
+            <a href="/auth/sign-up">CREATE FREE ACCOUNT</a>
+          </button>
+          <p id="no-credit-card">No credit card required</p>
+        </div>
+        <img src="/assets/welcome.png" alt="">
+      </div>   
+    <% } %>
+  </div>
 </body>
 </html>

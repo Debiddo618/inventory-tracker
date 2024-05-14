@@ -33,7 +33,7 @@
                 </tr>
 
                 <% inventory.products.forEach(product => { %>
-                    <tr>
+                    <tr id= <%= product._id  %>>
                         <td><%= product.name  %></td>
                         <td><%= product.description  %></td>
                         <td><%= product.amount  %></td>
@@ -92,15 +92,13 @@
             </form>
         </div>
         <br>
-        
-        <!-- <a href="/products/new">Add Product</a> -->
-        <br>
     <% } else { %>
     <p>You don't own this, <%= inventory.owner.username %> does!</p>
     <% } %>
 
     <a href="/inventories">Back to All Inventory</a>
     <script>
+        // create new product
         const createProductModal = document.getElementsByClassName('create-product-modal')[0];
 
         const inventoryId = document.getElementById("inventory");

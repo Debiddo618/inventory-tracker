@@ -1,8 +1,27 @@
- <!-- partials/_navbar.ejs -->
-
-<nav>
-    <a href="/auth/sign-out">Sign Out</a>
-    <a href="/auth/sign-up">Sign Up</a>
-    <a href="/auth/sign-in">Sign In</a>
+<nav class="navbar">
+    <div class="logo-title">
+        <div class="logo">
+            <img src="/assets/logo.png" alt="" width="50px" height="50px">
+        </div>
+        <div class="title">
+            InventoryPro
+        </div>
+    </div>
+    <% if (user) { %>
+        <div class="links">
+            <a href="/inventories">All Inventories</a>
+            <a href="/products">All Products</a>
+            <a href="/auth/sign-out">Sign Out</a>
+        </div>
+    <% }else{ %>
+        <div class="links">
+            <button class="button login">
+                <a href="/auth/sign-in">Login</a>
+            </button>
+            <button class="button">
+                <a href="/auth/sign-up">Sign Up</a>
+            </button>
+        </div>
+    <% } %>
 </nav>
   

@@ -60,11 +60,12 @@ router.delete('/:inventoryId', async (req, res) => {
         await Product.findByIdAndDelete(product);
     }
 
-    // delete the inventory
+    // delete the inventory from User
     const currentUser = await User.findById(req.session.user._id);
     currentUser.inventories = currentUser.inventories.filter(inventory => inventory != req.params.inventoryId);
     await currentUser.save();
 
+    // delete inventory
     await Inventory.findByIdAndDelete(req.params.inventoryId)
     res.redirect('/inventories');
 })
