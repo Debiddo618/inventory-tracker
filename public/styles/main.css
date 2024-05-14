@@ -10,13 +10,14 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
+
 /* Welcome Page */
 .navbar {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: .5rem;
-    background-color: #121212;
+    background-color: #1E1F1E;
     color: white;
 }
 
@@ -47,6 +48,16 @@ a {
 
 .navbar a {
     margin: 10px;
+}
+
+.button.inventories,
+.button.products {
+    background: rgb(25, 135, 84);
+    width: auto;
+}
+
+.button.sign-out{
+    background: rgb(220, 53, 69);
 }
 
 /* Welcome Page */
@@ -137,6 +148,54 @@ a {
     max-height: 25px;
 }
 
+/* Sign-in form */
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 400px;
+    height: 500px;
+    margin: 20px auto;
+    gap: 10px;
+    padding: 20px 30px;
+    border-radius: 1rem;
+    box-shadow: 0 0 5px #888888;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form h1 {
+    text-align: center;
+    align-self: start;
+}
+
+form input {
+    margin-bottom: 10px;
+    line-height: 2rem;
+    font-size: 1.5rem;
+    border-radius: 5px
+}
+
+form .button.login {
+    width: 100%;
+    margin: 10px auto;
+    padding: 10px;
+}
+
+form .button.sign-up {
+    width: 100%;
+    margin: 10px auto;
+    padding: 10px;
+}
+
+form label {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
 /* Product Create Form Modal */
 .create-product-modal {
     display: none;
@@ -157,6 +216,8 @@ a {
     width: 50%;
     gap: 1rem;
 }
+
+
 
 table {
     width: 100%;
