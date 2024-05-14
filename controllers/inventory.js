@@ -17,7 +17,7 @@ function getRandomColor() {
 
 // index route
 router.get('/', async (req,res)=>{
-    const allInventories = await Inventory.find()
+    const allInventories = await Inventory.find({owner:req.session.user._id});
     res.render('inventories/index',{inventories:allInventories});
 })
 
