@@ -8,12 +8,51 @@
 </head>
 <body>
     <%- include('../partials/_navbar.ejs') %>
-    <h1>Here is all Your inventory</h1>
-    <ul>
-        <% inventories.forEach(inventory => { %>
-            <a href="/inventories/<%= inventory._id  %>"><li><%= inventory.name  %></li></a>
-        <% }) %>
-    </ul>
-    <a href="/inventories/new">Add New Inventory</a>
+    <div class="inventories-grid">
+        <div class="inventories-list">
+            <h1>All Inventories</h1>
+            <% inventories.forEach(inventory => { %>
+                <div class="inventory">
+                    <a href="/inventories/<%= inventory._id  %>">
+                        <div class="color" style="background-color: <%= inventory.color %>"></div>
+                    </a>
+                    <a href="/inventories/<%= inventory._id  %>">
+                        <%= inventory.name  %>
+                    </a>
+                </div>
+            <% }) %>
+        </div>
+        <div class="inventories-container">
+            <h1>Dashboard</h1>
+            <button class="button add-inventory">
+                <a href="/inventories/new">Add New Inventory</a>
+            </button>
+            <div class="inventories">
+                <% inventories.forEach(inventory => { %>
+                    <div class="inventory">
+                        <a class="inventory-color" href="/inventories/<%= inventory._id  %>" style="background-color: <%= inventory.color %>">
+                        </a>
+                        <a href="/inventories/<%= inventory._id  %>">
+                            <%= inventory.name  %>
+                        </a>
+
+                        <div class="inventory-description">
+                            <p><%= inventory.description  %></p>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+    </div>
+    <script>
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+              color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+          }
+    </script>
 </body>
 </html>

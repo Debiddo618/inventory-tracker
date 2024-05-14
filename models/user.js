@@ -20,6 +20,11 @@ const inventorySchema = new mongoose.Schema({
     type:String,
     required:true,
   },
+  description:String,
+  color:{
+    type:String,
+    default:"#cccccc"
+  },
   owner:{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
