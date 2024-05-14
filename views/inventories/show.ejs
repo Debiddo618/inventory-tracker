@@ -7,6 +7,8 @@
     <title><%= inventory.name  %> Inventory</title>
 </head>
 <body>
+    <%- include('../partials/_navbar.ejs') %>
+
     <h1>Inventory: <%= inventory.name  %></h1>
     <h1>Owner: <%= inventory.owner.username  %></h1>
 

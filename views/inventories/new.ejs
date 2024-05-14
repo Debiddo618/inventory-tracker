@@ -3,17 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/main.css">
     <title>Create a new Inventory</title>
 </head>
 <body>
-        <h1>Creating a new inventory</h1>
-        <form action="/inventories" method="POST">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name">
+    <%- include('../partials/_navbar.ejs') %>
 
-            <!-- implement product later -->
-            <button type="submit">Create Inventory</button>
-        </form>
-        <a href="/inventories">Back to All Inventory</a>
+    <h1>Creating a new inventory</h1>
+    <form action="/inventories" method="POST">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name">
+
+        <!-- implement product later -->
+        <button type="submit">Create Inventory</button>
+    </form>
+    <a href="/inventories">Back to All Inventory</a>
 </body>
 </html>
