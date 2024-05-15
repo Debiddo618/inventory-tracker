@@ -45,8 +45,9 @@ router.post('/', async (req,res)=>{
 
 // show inventory by ID
 router.get('/:inventoryId',async (req,res)=>{
+    const allInventories = await Inventory.find({owner:req.session.user._id});
     const foundInventory = await Inventory.findById(req.params.inventoryId).populate('owner').populate('products');
-    res.render("inventories/show",{inventory:foundInventory});
+    res.render("inventories/show",{inventory:foundInventory,inventories:allInventories});
 })
 
 // get edit form

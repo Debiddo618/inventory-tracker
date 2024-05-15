@@ -9,18 +9,16 @@
 <body>
     <%- include('../partials/_navbar.ejs') %>
 
-    <h1>Creating a new inventory</h1>
-    <form action="/inventories" method="POST">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name">
-
-        <label for="description">Description:</label>
-        <input type="text" id="description" name="description">
-
-
-        <!-- implement product later -->
-        <button type="submit">Create Inventory</button>
-    </form>
-    <a href="/inventories">Back to All Inventory</a>
+    <div class="form">
+        <h1>Creating a new inventory</h1>
+        <form action="/inventories" method="POST">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name">
+            <label for="description">Description:</label>
+            <input type="text" id="description" name="description">
+            <!-- implement product later -->
+            <button class="button create-inventory" type="submit">Create Inventory</button>
+        </form>
+    </div>
 </body>
 </html>

@@ -8,56 +8,78 @@
 </head>
 <body>
     <%- include('../partials/_navbar.ejs') %>
-
-    <h1>Inventory: <%= inventory.name  %></h1>
-    <h1>Owner: <%= inventory.owner.username  %></h1>
-
     <% if (inventory.owner._id.equals(user._id)) { %>
-
-        <a href="/inventories/<%= inventory._id  %>/edit">Edit</a>
-
-        <form action="/inventories/<%= inventory._id %>?_method=DELETE" method="POST">
-            <button type="submit">Delete this inventory</button>
-        </form>
-
         <!-- List of Products -->
-        <div class="product-table-container">
-            <h1>Product List</h1>
-            <table>
-                <tr>
-                  <th>Name</th>
-                  <th>Description</th>
-                  <th>Amount</th>
-                  <th>Price</th>
-                  <th>Status</th>
-                  <th>Edit</th>
-                  <th>Delete</th>
-                </tr>
-
-                <% inventory.products.forEach(product => { %>
-                    <tr id= <%= product._id  %>>
-                        <td><%= product.name  %></td>
-                        <td><%= product.description  %></td>
-                        <td><%= product.amount  %></td>
-                        <td><%= product.price  %></td>
-                        <td><%= product.status  %></td>
-                        <td>
-                            <a href="/products/<%= product._id  %>/edit">
-                                Edit
+        <div class="products-grid">
+            <div class="inventories-list">
+                <h1>Inventory: <%= inventory.name  %></h1>
+                <% inventories.forEach(inventory => { %>
+                    <div class="inventory">
+                        <div class="name-color">
+                            <a href="/inventories/<%= inventory._id  %>">
+                                <div class="color" style="background-color: <%= inventory.color %>"></div>
                             </a>
-                        </td>
-                        <td>
-                            <form action="/products/<%= product._id %>/<%= inventory._id  %>?_method=DELETE" method="POST">
-                                <button type="submit">
-                                    Delete
+                            <a href="/inventories/<%= inventory._id  %>">
+                                <%= inventory.name  %>
+                            </a>
+                        </div>
+                        <div class="inventory-icons">
+                            <button class="button edit">
+                                <a href="/inventories/<%= inventory._id  %>/edit">
+                                    <img class="icon" src="/assets/edit.svg" alt="">
+                                </a>
+                            </button>
+                            <form action="/inventories/<%= inventory._id %>?_method=DELETE" method="POST">
+                                <button class="button delete" type="submit">
+                                    <img class="icon" src="/assets/delete.svg" alt="">
                                 </button>
                             </form>
-                        </td>
-                    </tr>
-
+                        </div>
+                    </div>
                 <% }) %>
-            </table>
-            <button onclick="handleClick()">Add a new Product</button>
+                <button class="button add-inventory">
+                    <a href="/inventories/new">Create New Inventory</a>
+                </button>
+            </div>
+
+            <div class="product-table-container">
+                <h1><%= inventory.name  %> Product List</h1>
+                <button class="button create-product" onclick="handleClick()">Create New Product</button>
+                <table>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                      <th>Amount</th>
+                      <th>Price</th>
+                      <th>Status</th>
+                      <th>Edit</th>
+                      <th>Delete</th>
+                    </tr>
+                    <% inventory.products.forEach(product => { %>
+                        <tr id= <%= product._id  %>>
+                            <td><%= product.name  %></td>
+                            <td><%= product.description  %></td>
+                            <td><%= product.amount  %></td>
+                            <td>$<%= product.price  %></td>
+                            <td><%= product.status  %></td>
+                            <td>
+                                <button class="button edit">
+                                    <a href="/products/<%= product._id  %>/edit">
+                                        <img class="icon" src="/assets/edit.svg" alt="">
+                                    </a>
+                                </button>
+                            </td>
+                            <td>
+                                <form action="/products/<%= product._id %>/<%= inventory._id  %>?_method=DELETE" method="POST">
+                                    <button class="button delete" type="submit">
+                                        <img class="icon" src="/assets/delete.svg" alt="">
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    <% }) %>
+                </table>
+            </div>
         </div>
 
         <br>
@@ -90,15 +112,13 @@
                 <input type="text" name="inventory" id="inventory" value="<%= inventory._id  %>">
                 <br>
     
-                <button type="submit">Create Product</button>
+                <button class="button create-product" type="submit">Create Product</button>
             </form>
         </div>
         <br>
     <% } else { %>
     <p>You don't own this, <%= inventory.owner.username %> does!</p>
     <% } %>
-
-    <a href="/inventories">Back to All Inventory</a>
     <script>
         // create new product
         const createProductModal = document.getElementsByClassName('create-product-modal')[0];

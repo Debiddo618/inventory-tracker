@@ -9,23 +9,40 @@
 <body>
     <%- include('../partials/_navbar.ejs') %>
     <div class="inventories-grid">
-        <div class="inventories-list">
-            <h1>All Inventories</h1>
-            <% inventories.forEach(inventory => { %>
-                <div class="inventory">
-                    <a href="/inventories/<%= inventory._id  %>">
-                        <div class="color" style="background-color: <%= inventory.color %>"></div>
-                    </a>
-                    <a href="/inventories/<%= inventory._id  %>">
-                        <%= inventory.name  %>
-                    </a>
-                </div>
-            <% }) %>
-        </div>
+            <div class="inventories-list">
+                <h1>All Inventories</h1>
+                <% inventories.forEach(inventory => { %>
+                    <div class="inventory">
+                        <div class="name-color">
+                            <a href="/inventories/<%= inventory._id  %>">
+                                <div class="color" style="background-color: <%= inventory.color %>"></div>
+                            </a>
+                            <a href="/inventories/<%= inventory._id  %>">
+                                <%= inventory.name  %>
+                            </a>
+                        </div>
+                        <div class="inventory-icons">
+                            <button class="button edit">
+                                <a href="/inventories/<%= inventory._id  %>/edit">
+                                    <img class="icon" src="/assets/edit.svg" alt="">
+                                </a>
+                            </button>
+                            <form action="/inventories/<%= inventory._id %>?_method=DELETE" method="POST">
+                                <button class="button delete" type="submit">
+                                    <img class="icon" src="/assets/delete.svg" alt="">
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                <% }) %>
+                <button class="button add-inventory">
+                    <a href="/inventories/new">Create New Inventory</a>
+                </button>
+            </div>
         <div class="inventories-container">
             <h1>Dashboard</h1>
             <button class="button add-inventory">
-                <a href="/inventories/new">Add New Inventory</a>
+                <a href="/inventories/new">Create New Inventory</a>
             </button>
             <div class="inventories">
                 <% inventories.forEach(inventory => { %>
