@@ -214,7 +214,7 @@ form label {
 .inventories-grid,
 .products-grid {
     display: grid;
-    grid-template-columns: 15% 1fr;
+    grid-template-columns: minmax(300px, 15%) 1fr;
     grid-template-rows: 1fr;
     height: 100vh;
 }
@@ -316,19 +316,9 @@ form label {
     margin-top: 10px;
 }
 
-/* Product Create Form Modal */
-.create-product-modal {
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 20px;
-    padding: 10px;
-    border: 1px solid black;
-}
-
 /* Table style */
 .product-table-container {
+    position: relative;
     display: flex;
     flex-direction: column;
     width: 75%;
@@ -336,6 +326,10 @@ form label {
     align-items: center;
     margin: 0 auto;
     padding: 10px;
+}
+
+.product-table-container p {
+    color: #888888;
 }
 
 table {
@@ -361,4 +355,38 @@ button.button.edit {
     width: 35px;
     height: 35px;
     margin: 0 auto;
+}
+
+/* Product Create Form Modal */
+.create-product-modal-container {
+    display: none;
+    background-color: red;
+    width: auto;
+    padding: 10px;
+}
+
+.create-product-modal {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+/* Update form */
+.button.update {
+    width: auto;
+    margin: 0;
+}
+
+/* Inventory Edit Form */
+input[type="color"] {
+    width: 50px;
+    height: 50px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
 }

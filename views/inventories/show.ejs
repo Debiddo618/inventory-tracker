@@ -41,9 +41,9 @@
                     <a href="/inventories/new">Create New Inventory</a>
                 </button>
             </div>
-
             <div class="product-table-container">
                 <h1><%= inventory.name  %> Product List</h1>
+                <p class="inventory-description"><%= inventory.description  %></p>
                 <button class="button create-product" onclick="handleClick()">Create New Product</button>
                 <table>
                     <tr>
@@ -79,56 +79,51 @@
                         </tr>
                     <% }) %>
                 </table>
+
+                <!-- Create Product Form -->
+                <div class="create-product-modal-container">
+                    <div class="create-product-modal">
+                        <h1>Creating a new product</h1>
+                        <form action="/products" method="POST">
+                            <label for="name">Name:</label>
+                            <input type="text" id="name" name="name" required>
+                            <br>
+                            <label for="description">Description:</label>
+                            <input type="text" id="description" name="description">
+                            <br>
+                            <label for="amount">Amount:</label>
+                            <input type="number" id="amount" name="amount" required>
+                            <br>
+                            <label for="price">Price:</label>
+                            <input type="number" id="price" name="price">
+                            <br>
+                            <label for="status">Status:</label>
+                            <input type="text" id="status" name="status" required>
+                            <br>
+                            <input type="text" name="inventory" id="inventory" value="<%= inventory._id  %>">
+                            <br>
+                            <button class="button create-product" type="submit">Create Product</button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
-
-        <br>
-
-        <!-- Create Product Form -->
-        <div class="create-product-modal">
-            <h1>Creating a new product</h1>
-            <form action="/products" method="POST">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required>
-                <br>
-    
-                <label for="description">Description:</label>
-                <input type="text" id="description" name="description">
-                <br>
-    
-                <label for="amount">Amount:</label>
-                <input type="number" id="amount" name="amount" required>
-                <br>
-
-                <label for="price">Price:</label>
-                <input type="number" id="price" name="price">
-                <br>
-    
-                <label for="status">Status:</label>
-                <input type="text" id="status" name="status" required>
-                <br>
-    
-                <!-- Wont be able to see this since display is none -->
-                <input type="text" name="inventory" id="inventory" value="<%= inventory._id  %>">
-                <br>
-    
-                <button class="button create-product" type="submit">Create Product</button>
-            </form>
-        </div>
-        <br>
     <% } else { %>
     <p>You don't own this, <%= inventory.owner.username %> does!</p>
     <% } %>
     <script>
+
+        const inventoryId = document.getElementById("inventory");
+        inventoryId.style.display = "none";
         // create new product
         const createProductModal = document.getElementsByClassName('create-product-modal')[0];
 
-        const inventoryId = document.getElementById("inventory");
+        const createProductModalContainer = document.getElementsByClassName('create-product-modal-container')[0];
 
-        inventoryId.style.display = "none";
 
         function handleClick(){
             createProductModal.style.display = "inline-flex";
+            createProductModalContainer.style.display = "inline-flex";
         }
     </script>
 </body>

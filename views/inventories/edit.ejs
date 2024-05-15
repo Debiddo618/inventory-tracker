@@ -3,18 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/main.css">
     <title>Edit Inventory</title>
 </head>
 <body>
+    <%- include('../partials/_navbar.ejs') %>
+
+    <div class="form">
         <h1>Editing Inventory</h1>
         <form action="/inventories/<%= inventory._id  %>?_method=PUT" method="POST">
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" value="<%= inventory.name  %>">
+            <br>
+            <label for="name">Description:</label>
+            <input type="text" id="description" name="description" value="<%= inventory.description%>">
+            <br>
+            <label for="color">Color:</label>
+            <input type="color" id="color" name="color" value="<%= inventory.color%>">
+            <br>
 
-            <!-- implement product later -->
-            <button type="submit">Update Inventory</button>
+            <button class="button update" type="submit">Update Inventory</button>
         </form>
-        <a href="/inventories">Back to All Inventory</a>
-
+    </div>
 </body>
 </html>
