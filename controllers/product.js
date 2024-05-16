@@ -36,7 +36,7 @@ router.post('/allProducts', async (req,res)=>{
     req.body.owner = req.session.user._id;
     const newProduct = await Product.create(req.body);
 
-    // save product into invenotry
+    // save product into inventory
     const foundInventory = await Inventory.findById(req.body.inventory);
     foundInventory.products.push(newProduct._id);
     await foundInventory.save();
@@ -48,10 +48,11 @@ router.post('/allProducts', async (req,res)=>{
     res.render('products/index',{products:allProducts, inventories:allInventories});
 })
 
-// show inventory by ID
+// show product by ID
 router.get('/:productId',async (req,res)=>{
     const foundProduct = await Product.findById(req.params.productId);
-    res.render("products/show",{product:foundProduct});
+    const foundInventory = await Inventory.find({products:foundProduct._id});
+    res.render("products/show",{product:foundProduct, inventory:foundInventory[0]});
 })
 
 // get edit form

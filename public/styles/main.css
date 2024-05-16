@@ -573,3 +573,26 @@ input[type="color"] {
 .products-container {
     position: relative;
 }
+
+/* Product Detail Page */
+.product-details-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.product-details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 1rem;
+    box-shadow: 0 0 5px #888888;
+}
+
+.product-icons {
+    display: flex;
+    gap: 10px;
+    width: fit-content;
+}
