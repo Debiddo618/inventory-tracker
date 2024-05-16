@@ -62,7 +62,8 @@ button a {
 
 .button.sign-out,
 .button.delete-inventory,
-form button.button.delete {
+form button.button.delete,
+button.cancel {
     background: rgb(220, 53, 69);
 }
 
@@ -80,7 +81,6 @@ form button.button.delete {
     justify-content: center;
     align-items: center;
     gap: 10px;
-    /* background: url("/assets/welcome.jpg") no-repeat center center fixed; */
     height: 100vh;
 }
 
@@ -351,7 +351,8 @@ td {
 }
 
 form button.button.delete,
-button.button.edit {
+button.button.edit,
+button.button.cancel {
     width: 35px;
     height: 35px;
     margin: 0 auto;
@@ -359,21 +360,48 @@ button.button.edit {
 
 /* Product Create Form Modal */
 .create-product-modal-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     display: none;
-    background-color: red;
     width: auto;
-    padding: 10px;
+    position: absolute;
+    z-index: 1;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: white;
+    backdrop-filter: 10px;
 }
 
 .create-product-modal {
+    position: relative;
     display: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 20px;
+    margin: 20px auto;
+    margin-top: -200px;
+    gap: 10px;
+    padding: 20px 30px;
+    border-radius: 1rem;
+    box-shadow: 0 0 5px #888888;
+}
+
+.form-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+button.button.cancel {
+    width: auto;
+    height: auto;
+    margin: 10px auto;
     padding: 10px;
-    border: 1px solid black;
-    border-radius: 5px;
 }
 
 /* Update form */
