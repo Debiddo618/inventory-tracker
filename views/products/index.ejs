@@ -133,7 +133,17 @@
                     <input type="number" id="price" name="price">
                     <br>
                     <label for="status">Status:</label>
-                    <input type="text" id="status" name="status" required>
+                    <select id="status" name="status">
+                        <option value="Active">Active</option>
+                        <option value="Inactive">Inactive</option>
+                        <option value="In Stock">In Stock</option>
+                        <option value="Out of Stock">Out of Stock</option>
+                        <option value="On Hold">On Hold</option>
+                        <option value="Discontinued">Discontinued</option>
+                        <option value="Pre-Order">Pre-Order</option>
+                        <option value="Backordered">Backordered</option>
+                        <option value="Pending Approval">Pending Approval</option>
+                    </select>
                     <br>
                     <!-- Need to update -->
                     <input type="text" name="inventory" id="inventory">

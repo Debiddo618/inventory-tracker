@@ -49,7 +49,8 @@ const productSchema = new mongoose.Schema({
   },
   status:{
     type:String,
-    required:true
+    required:true,
+    enum:["Active", "Inactive", "In Stock","Out of Stock", "On Hold", "Discontinued","Pre-Order","Backordered","Pending Approval"]
   },
   price:{
     type:Number,

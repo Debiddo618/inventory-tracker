@@ -257,11 +257,22 @@ form {
     align-self: start;
 }
 
-form input {
+form input,
+form select {
+    -webkit-appearance: none;
     margin-bottom: 10px;
     line-height: 2rem;
     font-size: 1.5rem;
-    border-radius: 5px
+    border-radius: 5px;
+    padding: 5px;
+}
+
+form select {
+    background-image: url('/assets/downArrow.svg');
+    background-position: right center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    border: 1px solid black;
 }
 
 form .button.login {
