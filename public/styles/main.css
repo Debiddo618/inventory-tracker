@@ -10,8 +10,7 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
-
-/* Welcome Page */
+/* Navbar */
 .navbar {
     display: flex;
     align-items: center;
@@ -82,6 +81,78 @@ button.cancel {
     align-items: center;
     gap: 10px;
     height: 100vh;
+}
+
+.tutorial-container {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+    background-color: #1E1F1E;
+    opacity: 0.95;
+    color: white;
+}
+
+.tutorial {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+}
+
+.tutorial p {
+    color: #888888;
+}
+
+.tutorial h1 {
+    font-size: 4rem;
+    text-align: center;
+}
+
+.tutorial-quote {
+    display: flex;
+    justify-content: center;
+    flex: 1;
+    color: #1E1F1E;
+    font-size: 3rem;
+    text-align: center;
+    text-decoration: dashed;
+    width: 50%;
+    margin: 20px;
+    font-weight: bold;
+}
+
+.tutorial-container h1 {
+    margin: 10px;
+}
+
+.tutorial-container button.button.add-inventory {
+    margin-top: 20px;
+}
+
+.steps {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.step-1 img,
+.step-2 img {
+    width: 100px;
+    height: 100px;
+}
+
+.step-1,
+.step-2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 30%;
+    text-align: center;
 }
 
 .image-slogan {

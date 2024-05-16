@@ -41,7 +41,7 @@ app.use(passUserToView);
 
 // home Page
 app.get('/', (req, res) => {
-    res.render('index');
+    res.render('index',{homepage:true});
 });
 
 app.use('/auth', authController);

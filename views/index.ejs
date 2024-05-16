@@ -10,7 +10,30 @@
   <%- include('./partials/_navbar.ejs') %>
   <div class="welcome-page">
     <% if (user) { %>
-      <h1>Welcome to InventoryPro, <%= user.username %>!</h1>
+      <div class="tutorial-container">
+        <h1>Welcome to InventoryPro, <%= user.username %>!</h1>
+        <div class="tutorial">
+          <p>How InventoryPro Works</p>
+          <h1>Two Steps to Smarter Organizing</h1>
+          <div class="steps">
+            <div class="step-1">
+              <img src="/assets/first.png" alt="">
+              <h2>Create Your New Inventory</h2>
+            </div>
+            <img src="/assets/arrow.png" alt="">
+            <div class="step-2">
+              <img src="/assets/second.png" alt="">
+              <h2>Add Products To Your New Inventory </h2>
+            </div>
+          </div>
+          <button class="button add-inventory">
+            <a href="/inventories/new">Create New Inventory</a>
+          </button>
+        </div>
+      </div>
+      <div class="tutorial-quote">
+        <p><em>"Unlock Efficiency, Unleash Potential: Simplify Inventory Management Today."</em></p>
+      </div>
     <% } else { %>
       <div class="image-slogan">
         <div class="slogan">
