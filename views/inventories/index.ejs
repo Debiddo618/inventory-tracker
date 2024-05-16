@@ -22,6 +22,11 @@
                             </a>
                         </div>
                         <div class="inventory-icons">
+                            <button class="button view">
+                                <a href="/inventories/<%= inventory._id  %>">
+                                    <img class="icon" src="/assets/view.svg" alt="">
+                                </a>
+                            </button>
                             <button class="button edit">
                                 <a href="/inventories/<%= inventory._id  %>/edit">
                                     <img class="icon" src="/assets/edit.svg" alt="">
@@ -52,9 +57,25 @@
                         <a href="/inventories/<%= inventory._id  %>">
                             <%= inventory.name  %>
                         </a>
-
                         <div class="inventory-description">
-                            <p><%= inventory.description  %></p>
+                            <p class="ellipsis"><%= inventory.description  %></p>
+                        </div>
+                        <div class="inventory-icons">
+                            <button class="button view">
+                                <a href="/inventories/<%= inventory._id  %>">
+                                    <img class="icon" src="/assets/view.svg" alt="">
+                                </a>
+                            </button>
+                            <button class="button edit">
+                                <a href="/inventories/<%= inventory._id  %>/edit">
+                                    <img class="icon" src="/assets/edit.svg" alt="">
+                                </a>
+                            </button>
+                            <form action="/inventories/<%= inventory._id %>?_method=DELETE" method="POST">
+                                <button class="button delete" type="submit">
+                                    <img class="icon" src="/assets/delete.svg" alt="">
+                                </button>
+                            </form>
                         </div>
                     </div>
                 <% }) %>
