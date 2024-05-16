@@ -365,6 +365,8 @@ button.button.view a img {
 }
 
 .inventory-product-container {
+    display: flex;
+    flex-direction: column;
     box-shadow: 0 0 5px #888888;
     padding: 10px;
     width: 100%;
@@ -565,4 +567,9 @@ input[type="color"] {
 /* Edit Product Form */
 .form.edit-product {
     height: auto;
+}
+
+/* Product Show Page */
+.products-container {
+    position: relative;
 }

@@ -65,7 +65,7 @@ router.put('/:inventoryId', async (req,res)=>{
         req.params.inventoryId,
         req.body,
         {new:true}
-    ).populate('owner');
+    ).populate('owner').populate('products');
     const allInventories = await Inventory.find({owner:req.session.user._id});
     res.render('inventories/show',{inventory:newInventory, inventories:allInventories});
 })

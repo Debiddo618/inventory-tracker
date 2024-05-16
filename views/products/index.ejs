@@ -101,7 +101,7 @@
                                     </button>
                                 </td>
                                 <td>
-                                    <form action="/products/<%= product._id %>/<%= inventory._id  %>?_method=DELETE" method="POST">
+                                    <form action="/products/<%= product._id %>/<%= inventory._id  %>/allproducts?_method=DELETE" method="POST">
                                         <button class="button delete" type="submit">
                                             <img class="icon" src="/assets/delete.svg" alt="">
                                         </button>
@@ -110,10 +110,65 @@
                             </tr>
                         <% }) %>
                     </table>
+                    <button class="button create-product" onclick="handleClick('<%= inventory._id  %>')">Create New Product</button>
                 </div>
             <% }) %>
         </div>
+
+        <!-- Create Product Form -->
+        <div class="create-product-modal-container">
+            <div class="create-product-modal">
+                <h1>Create New Product</h1>
+                <form action="/products/allProducts" method="POST">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                    <br>
+                    <label for="description">Description:</label>
+                    <input type="text" id="description" name="description">
+                    <br>
+                    <label for="amount">Amount:</label>
+                    <input type="number" id="amount" name="amount" required>
+                    <br>
+                    <label for="price">Price:</label>
+                    <input type="number" id="price" name="price">
+                    <br>
+                    <label for="status">Status:</label>
+                    <input type="text" id="status" name="status" required>
+                    <br>
+                    <!-- Need to update -->
+                    <input type="text" name="inventory" id="inventory">
+                    <br>
+                    <div class="form-buttons">
+                        <button class="button create-product" type="submit">
+                            Create Product
+                        </button>
+                        <button type="button" onclick="hideModal()" class="button cancel">
+                            Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
     </div>
+    <script>
+        const inventoryId = document.getElementById("inventory");
+        inventoryId.style.display = "none";
+
+        const createProductModal = document.getElementsByClassName('create-product-modal')[0];
+        const createProductModalContainer = document.getElementsByClassName('create-product-modal-container')[0];
+
+        function handleClick(value){
+            inventoryId.value = value;
+            createProductModal.style.display = "inline-flex";
+            createProductModalContainer.style.display = "flex";
+        }
+
+        function hideModal(){
+            createProductModal.style.display = "none";
+            createProductModalContainer.style.display = "none";
+        }
+    </script>
 </div>
 
 
