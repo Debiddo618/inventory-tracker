@@ -42,12 +42,14 @@ router.get('/:productId/edit', async (req,res)=>{
 
 // update product
 router.put('/:productId', async (req,res)=>{
+    const allInventories = await Inventory.find({owner:req.session.user._id});
     const newProduct = await Product.findByIdAndUpdate(
         req.params.productId,
         req.body,
         {new:true}
     );
-    res.render('products/show',{product:newProduct});
+    const foundInventory = await Inventory.find({products:req.params.productId}).populate('owner').populate('products');
+    res.render("inventories/show",{inventory:foundInventory[0],inventories:allInventories});
 })
 
 // Delete route

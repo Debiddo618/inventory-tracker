@@ -9,31 +9,26 @@
 <body>
     <%- include('../partials/_navbar.ejs') %>
 
-    <h1>Editing Product</h1>
-    <form action="/products/<%= product._id  %>?_method=PUT" method="POST">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" value="<%= product.name  %>" required>
-        <br>
-
-        <label for="description">Description:</label>
-        <input type="text" id="description" name="description" value="<%= product.description  %>">
-        <br>
-
-        <label for="amount">Amount:</label>
-        <input type="number" id="amount" name="amount" value="<%= product.amount  %>" required>
-        <br>
-
-        <label for="status">Status:</label>
-        <input type="text" id="status" name="status" value="<%= product.status  %>" required>
-        <br>
-
-        <label for="price">Number:</label>
-        <input type="number" id="product" name="price" value="<%= product.price  %>">
-        <br>
-
-        <button type="submit">Update Product</button>
-    </form>
-    <a href="/products">Back to All Product</a>
-
+    <div class="form edit-product">
+        <h1>Edit Product</h1>
+        <form action="/products/<%= product._id  %>?_method=PUT" method="POST">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" value="<%= product.name  %>" required>
+            <br>
+            <label for="description">Description:</label>
+            <input type="text" id="description" name="description" value="<%= product.description  %>">
+            <br>
+            <label for="amount">Amount:</label>
+            <input type="number" id="amount" name="amount" value="<%= product.amount  %>" required>
+            <br>
+            <label for="status">Status:</label>
+            <input type="text" id="status" name="status" value="<%= product.status  %>" required>
+            <br>
+            <label for="price">Number:</label>
+            <input type="number" id="product" name="price" value="<%= product.price  %>">
+            <br>
+            <button class="button update-product" type="submit">Update Product</button>
+        </form>
+    </div>
 </body>
 </html>

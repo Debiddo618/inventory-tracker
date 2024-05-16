@@ -247,7 +247,8 @@ form label {
 }
 
 .button.add-inventory,
-.button.create-product {
+.button.create-product,
+.button.update-product {
     width: auto;
     margin: 10px auto;
     padding: 10px;
@@ -417,4 +418,9 @@ input[type="color"] {
     background-color: transparent;
     border: none;
     cursor: pointer;
+}
+
+/* Edit Product Form */
+.form.edit-product {
+    height: auto;
 }
