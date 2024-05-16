@@ -290,7 +290,8 @@ form label {
     height: 100vh;
 }
 
-.inventories-container {
+.inventories-container,
+.products-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -317,6 +318,57 @@ form label {
     overflow: hidden;
 }
 
+.products-container .products {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 75%;
+    gap: 10px;
+    text-align: left;
+}
+
+.products-container .products .inventory-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    border-bottom: #888888 solid 1px;
+    padding: 10px;
+    background-color: #1E1F1E;
+}
+
+.inventory-header p,
+.inventory-header h1,
+.inventory-header .inventory-icons {
+    color: #F5F5F5;
+    text-align: center;
+    width: 100%;
+}
+
+.inventory-header h1 a {
+    color: #F5F5F5;
+}
+
+
+.inventory-header .inventory-icons {
+    justify-content: flex-end;
+}
+
+.inventory-product-container {
+    box-shadow: 0 0 5px #888888;
+    padding: 10px;
+    width: 100%;
+}
+
+.icon-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+
 .button.add-inventory,
 .button.create-product,
 .button.update-product {
@@ -331,7 +383,7 @@ form label {
     background-color: blue;
 }
 
-.inventory a {
+a {
     color: black;
     text-decoration: none;
 
@@ -406,12 +458,14 @@ form label {
 
 table {
     width: 100%;
+    border-collapse: collapse;
 }
 
 th,
 td {
     text-align: center;
     padding: 0.5rem;
+    width: 100px;
 
 }
 

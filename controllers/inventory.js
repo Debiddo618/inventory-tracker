@@ -5,6 +5,16 @@ const User = models.User;
 const express = require('express');
 const router = express.Router();
 
+// Function to generate a random color
+function getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+
 // index route
 router.get('/', async (req,res)=>{
     const allInventories = await Inventory.find({owner:req.session.user._id});
@@ -19,6 +29,11 @@ router.get('/new', async (req,res)=>{
 // create a new inventory
 router.post('/', async (req,res)=>{
     req.body.owner = req.session.user._id;
+
+    if(req.body.color === "#000000"){
+        req.body.color = getRandomColor();
+    }
+
 
     const newInventory = await Inventory.create(req.body)
 

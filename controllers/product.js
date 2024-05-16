@@ -6,8 +6,9 @@ const router = express.Router();
 
 // index route
 router.get('/', async (req,res)=>{
-    const allProducts = await Product.find()
-    res.render('products/index',{products:allProducts});
+    const allInventories = await Inventory.find({owner:req.session.user._id}).populate('products');
+    const allProducts = await Product.find({owner:req.session.user._id})
+    res.render('products/index',{products:allProducts, inventories:allInventories});
 })
 
 // get create form for product
@@ -18,6 +19,7 @@ router.get('/new', async (req,res)=>{
 // create a new product
 router.post('/', async (req,res)=>{
     // create product
+    req.body.owner = req.session.user._id;
     const newProduct = await Product.create(req.body);
 
     // save product into invenotry

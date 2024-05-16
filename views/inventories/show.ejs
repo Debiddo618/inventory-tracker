@@ -58,7 +58,7 @@
                     </tr>
                     <% inventory.products.forEach(product => { %>
                         <tr id= <%= product._id  %>>
-                            <td><%= product.name  %></td>
+                            <td><a href="/products/<%= product._id  %>"><%= product.name  %></a></td>
                             <td><%= product.description  %></td>
                             <td><%= product.amount  %></td>
                             <td>$<%= product.price  %></td>

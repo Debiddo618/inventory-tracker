@@ -8,12 +8,104 @@
 </head>
 <body>
     <%- include('../partials/_navbar.ejs') %>
-    <h1>Here is all Your Products</h1>
-    <ul>
-        <% products.forEach(product => { %>
-            <a href="/products/<%= product._id  %>"><li><%= product.name  %></li></a>
-        <% }) %>
-    </ul>
-    <a href="/products/new">Add New Product</a>
+    <div class="products-grid">
+        <div class="inventories-list">
+            <h1>All Inventories</h1>
+            <% inventories.forEach(inventory => { %>
+                <div class="inventory">
+                    <div class="name-color">
+                        <a href="/inventories/<%= inventory._id  %>">
+                            <div class="color" style="background-color: <%= inventory.color %>"></div>
+                        </a>
+                        <a href="/inventories/<%= inventory._id  %>">
+                            <%= inventory.name  %>
+                        </a>
+                    </div>
+                    <div class="inventory-icons">
+                        <button class="button edit">
+                            <a href="/inventories/<%= inventory._id  %>/edit">
+                                <img class="icon" src="/assets/edit.svg" alt="">
+                            </a>
+                        </button>
+                        <form action="/inventories/<%= inventory._id %>?_method=DELETE" method="POST">
+                            <button class="button delete" type="submit">
+                                <img class="icon" src="/assets/delete.svg" alt="">
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            <% }) %>
+            <button class="button add-inventory">
+                <a href="/inventories/new">Create New Inventory</a>
+            </button>
+        </div>
+    <div class="products-container">
+        <h1>All Products</h1>
+        <div class="products">
+            <% inventories.forEach(inventory => { %>
+                <div class="inventory-product-container">
+                    <div class="inventory-header">
+                        <h1>                        
+                            <a href="/inventories/<%= inventory._id  %>">
+                                <%= inventory.name  %>
+                            </a>
+                        </h1>
+                        <p><%= inventory.description  %></p>
+                        <div class="inventory-icons">
+                            <div class="icon-container">
+                                <button class="button edit">
+                                    <a href="/inventories/<%= inventory._id  %>/edit">
+                                        <img class="icon" src="/assets/edit.svg" alt="">
+                                    </a>
+                                </button>
+                                <form action="/inventories/<%= inventory._id %>?_method=DELETE" method="POST">
+                                    <button class="button delete" type="submit">
+                                        <img class="icon" src="/assets/delete.svg" alt="">
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <table>
+                        <tr>
+                          <th>Name</th>
+                          <th>Description</th>
+                          <th>Amount</th>
+                          <th>Price</th>
+                          <th>Status</th>
+                          <th>Edit</th>
+                          <th>Delete</th>
+                        </tr>
+                        <% inventory.products.forEach(product => { %>
+                            <tr id= <%= product._id  %>>
+                                <td><a href="/products/<%= product._id  %>"><%= product.name  %></a></td>
+                                <td><%= product.description  %></td>
+                                <td><%= product.amount  %></td>
+                                <td>$<%= product.price  %></td>
+                                <td><%= product.status  %></td>
+                                <td>
+                                    <button class="button edit">
+                                        <a href="/products/<%= product._id  %>/edit">
+                                            <img class="icon" src="/assets/edit.svg" alt="">
+                                        </a>
+                                    </button>
+                                </td>
+                                <td>
+                                    <form action="/products/<%= product._id %>/<%= inventory._id  %>?_method=DELETE" method="POST">
+                                        <button class="button delete" type="submit">
+                                            <img class="icon" src="/assets/delete.svg" alt="">
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        <% }) %>
+                    </table>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+</div>
+
+
 </body>
 </html>
