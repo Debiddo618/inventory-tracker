@@ -6,9 +6,13 @@ const router = express.Router();
 
 // index route
 router.get('/', async (req,res)=>{
-    const allInventories = await Inventory.find({owner:req.session.user._id}).populate('products');
-    const allProducts = await Product.find({owner:req.session.user._id})
-    res.render('products/index',{products:allProducts, inventories:allInventories});
+    try {
+        const allInventories = await Inventory.find({owner:req.session.user._id}).populate('products');
+        const allProducts = await Product.find({owner:req.session.user._id})
+        res.render('products/index',{products:allProducts, inventories:allInventories});
+    } catch (error) {
+        res.redirect('/');
+    }
 })
 
 // get create form for product
@@ -18,90 +22,118 @@ router.get('/new', async (req,res)=>{
 
 // create a new product
 router.post('/', async (req,res)=>{
-    // create product
-    req.body.owner = req.session.user._id;
-    const newProduct = await Product.create(req.body);
+    try {
+        // create product
+        req.body.owner = req.session.user._id;
+        const newProduct = await Product.create(req.body);
 
-    // save product into invenotry
-    const foundInventory = await Inventory.findById(req.body.inventory);
-    foundInventory.products.push(newProduct._id);
-    foundInventory.save();
+        // save product into invenotry
+        const foundInventory = await Inventory.findById(req.body.inventory);
+        foundInventory.products.push(newProduct._id);
+        foundInventory.save();
 
     res.redirect(`/inventories/${foundInventory._id}`);
+    } catch (error) {
+        res.redirect('/');
+    }
 })
 
 // create a new product and redirect to product index
 router.post('/allProducts', async (req,res)=>{
-    // create product
-    req.body.owner = req.session.user._id;
-    const newProduct = await Product.create(req.body);
+    try {
+        // create product
+        req.body.owner = req.session.user._id;
+        const newProduct = await Product.create(req.body);
 
-    // save product into inventory
-    const foundInventory = await Inventory.findById(req.body.inventory);
-    foundInventory.products.push(newProduct._id);
-    await foundInventory.save();
+        // save product into inventory
+        const foundInventory = await Inventory.findById(req.body.inventory);
+        foundInventory.products.push(newProduct._id);
+        await foundInventory.save();
 
-    const allInventories = await Inventory.find({owner:req.session.user._id}).populate('products');
-    const allProducts = await Product.find({owner:req.session.user._id});
+        const allInventories = await Inventory.find({owner:req.session.user._id}).populate('products');
+        const allProducts = await Product.find({owner:req.session.user._id});
 
 
-    res.render('products/index',{products:allProducts, inventories:allInventories});
+        res.render('products/index',{products:allProducts, inventories:allInventories});
+    } catch (error) {
+        res.redirect('/');
+    }
 })
 
 // show product by ID
 router.get('/:productId',async (req,res)=>{
-    const foundProduct = await Product.findById(req.params.productId);
-    const foundInventory = await Inventory.find({products:foundProduct._id});
-    res.render("products/show",{product:foundProduct, inventory:foundInventory[0]});
+    try {
+        const foundProduct = await Product.findById(req.params.productId);
+        const foundInventory = await Inventory.find({products:foundProduct._id});
+        res.render("products/show",{product:foundProduct, inventory:foundInventory[0]});
+    } catch (error) {
+        res.redirect('/');
+    }
 })
 
 // get edit form
 router.get('/:productId/edit', async (req,res)=>{
-    const foundProduct = await Product.findById(req.params.productId);
-    res.render("products/edit",{product:foundProduct});
+    try {
+        const foundProduct = await Product.findById(req.params.productId);
+        res.render("products/edit",{product:foundProduct});
+    } catch (error) {
+        res.redirect('/');
+    }
 })
 
 // update product
 router.put('/:productId', async (req,res)=>{
-    const allInventories = await Inventory.find({owner:req.session.user._id});
-    const newProduct = await Product.findByIdAndUpdate(
-        req.params.productId,
-        req.body,
-        {new:true}
-    );
-    const foundInventory = await Inventory.find({products:req.params.productId}).populate('owner').populate('products');
-    res.render("inventories/show",{inventory:foundInventory[0],inventories:allInventories});
+    try {
+        const allInventories = await Inventory.find({owner:req.session.user._id});
+        const newProduct = await Product.findByIdAndUpdate(
+            req.params.productId,
+            req.body,
+            {new:true}
+        );
+        const foundInventory = await Inventory.find({products:req.params.productId}).populate('owner').populate('products');
+        res.render("inventories/show",{inventory:foundInventory[0],inventories:allInventories});
+    } catch (error) {
+        res.redirect('/');
+    }
 })
 
 // Delete route
 router.delete('/:productId/:inventoryId', async (req, res) => {
-    // remove product from inventory
-    const foundInventory = await Inventory.findById(req.params.inventoryId);
-    foundInventory.products = foundInventory.products.filter(product => product != req.params.productId);
+    try {
+        // remove product from inventory
+        const foundInventory = await Inventory.findById(req.params.inventoryId);
+        foundInventory.products = foundInventory.products.filter(product => product != req.params.productId);
 
-    await foundInventory.save();
+        await foundInventory.save();
 
-    // delete the product
-    await Product.findByIdAndDelete(req.params.productId)
-    res.redirect(`/inventories/${req.params.inventoryId}`);
+        // delete the product
+        await Product.findByIdAndDelete(req.params.productId)
+        res.redirect(`/inventories/${req.params.inventoryId}`);
+    } catch (error) {
+        res.redirect('/');
+    }
 })
 
 // Delete route and rediect to product index
 router.delete('/:productId/:inventoryId/allproducts', async (req, res) => {
-    // remove product from inventory
-    const foundInventory = await Inventory.findById(req.params.inventoryId);
-    foundInventory.products = foundInventory.products.filter(product => product != req.params.productId);
+    try {
+        // remove product from inventory
+        const foundInventory = await Inventory.findById(req.params.inventoryId);
+        foundInventory.products = foundInventory.products.filter(product => product != req.params.productId);
 
-    await foundInventory.save();
+        await foundInventory.save();
 
-    // delete the product
-    await Product.findByIdAndDelete(req.params.productId)
+        // delete the product
+        await Product.findByIdAndDelete(req.params.productId)
 
-    const allInventories = await Inventory.find({owner:req.session.user._id}).populate('products');
-    const allProducts = await Product.find({owner:req.session.user._id});
+        const allInventories = await Inventory.find({owner:req.session.user._id}).populate('products');
+        const allProducts = await Product.find({owner:req.session.user._id});
 
 
-    res.render('products/index',{products:allProducts, inventories:allInventories});
+        res.render('products/index',{products:allProducts, inventories:allInventories});
+    } catch (error) {
+        res.redirect('/');
+    }
 })
 
 module.exports = router;
