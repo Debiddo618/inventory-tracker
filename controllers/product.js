@@ -109,18 +109,16 @@ router.put('/:productId',upload.single('image'), async (req,res)=>{
         const foundProduct = await Product.findById(req.params.productId);
 
         // remove the image if the image exists
-        if(foundProduct.image){
+        if(req.file){
             const filePath = `./public/uploads/${foundProduct.image}`;
             fs.unlink(filePath, (err) => {
                 if (err) {
                     console.error('Error deleting file:', err);
                     res.redirect('/');
                 }
-            })
-        }
+                req.body.image = req.file.filename;
 
-        if(req.file){
-            req.body.image = req.file.filename;
+            })
         }
         const newProduct = await Product.findByIdAndUpdate(
             req.params.productId,
