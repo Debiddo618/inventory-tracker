@@ -627,7 +627,7 @@ input[type="color"] {
     border-radius: 1rem;
     box-shadow: 0 0 5px #888888;
     margin: 10px;
-    object-fit: cover;
+    object-fit: fill;
 }
 
 .product-info {
