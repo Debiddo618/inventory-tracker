@@ -105,6 +105,20 @@ router.get('/:productId/edit', async (req,res)=>{
 router.put('/:productId',upload.single('image'), async (req,res)=>{
     try {
         const allInventories = await Inventory.find({owner:req.session.user._id});
+
+        const foundProduct = await Product.findById(req.params.productId);
+
+        // remove the image if the image exists
+        if(foundProduct.image){
+            const filePath = `./public/uploads/${foundProduct.image}`;
+            fs.unlink(filePath, (err) => {
+                if (err) {
+                    console.error('Error deleting file:', err);
+                    res.redirect('/');
+                }
+            })
+        }
+
         if(req.file){
             req.body.image = req.file.filename;
         }
