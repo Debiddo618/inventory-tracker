@@ -11,7 +11,7 @@
 
     <div class="form edit-product">
         <h1>Edit Product</h1>
-        <form action="/products/<%= product._id  %>?_method=PUT" method="POST">
+        <form action="/products/<%= product._id  %>?_method=PUT" method="POST" enctype="multipart/form-data">
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" value="<%= product.name  %>" required>
             <br>
@@ -36,6 +36,9 @@
                 <option value="Backordered">Backordered</option>
                 <option value="Pending Approval">Pending Approval</option>
             </select>
+            <br>
+            <label for="image" class="label-image">Upload Image</label>
+            <input type="file" name="image" id="image" accept="image/jpeg, image/png">
             <br>
             <button class="button update-product" type="submit">Update Product</button>
         </form>

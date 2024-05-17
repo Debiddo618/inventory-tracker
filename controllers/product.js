@@ -98,9 +98,10 @@ router.get('/:productId/edit', async (req,res)=>{
 })
 
 // update product
-router.put('/:productId', async (req,res)=>{
+router.put('/:productId',upload.single('image'), async (req,res)=>{
     try {
         const allInventories = await Inventory.find({owner:req.session.user._id});
+        req.body.image = req.file.filename;
         const newProduct = await Product.findByIdAndUpdate(
             req.params.productId,
             req.body,
