@@ -136,7 +136,6 @@ router.delete('/:productId/:inventoryId', async (req, res) => {
             })
         }
 
-
         // remove product from inventory
         const foundInventory = await Inventory.findById(req.params.inventoryId);
         foundInventory.products = foundInventory.products.filter(product => product != req.params.productId);
@@ -154,6 +153,19 @@ router.delete('/:productId/:inventoryId', async (req, res) => {
 // Delete route and rediect to product index
 router.delete('/:productId/:inventoryId/allproducts', async (req, res) => {
     try {
+        const foundProduct = await Product.findById(req.params.productId);
+
+        // remove the image if the image exists
+        if(foundProduct.image){
+            const filePath = `./public/uploads/${foundProduct.image}`;
+            fs.unlink(filePath, (err) => {
+                if (err) {
+                    console.error('Error deleting file:', err);
+                    res.redirect('/');
+                }
+            })
+        }
+
         // remove product from inventory
         const foundInventory = await Inventory.findById(req.params.inventoryId);
         foundInventory.products = foundInventory.products.filter(product => product != req.params.productId);
