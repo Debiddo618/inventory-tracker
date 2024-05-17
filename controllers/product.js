@@ -3,6 +3,19 @@ const Product = models.Product;
 const Inventory = models.Inventory;
 const express = require('express');
 const router = express.Router();
+const multer  = require('multer');
+const fs = require('fs');
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, './public/uploads')
+    },
+    filename: function (req, file, cb) {
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9) + '.png';
+        cb(null, file.fieldname + '-' + uniqueSuffix);
+    }
+})
+  
+const upload = multer({ storage: storage })
 
 // index route
 router.get('/', async (req,res)=>{
@@ -21,9 +34,10 @@ router.get('/new', async (req,res)=>{
 })
 
 // create a new product
-router.post('/', async (req,res)=>{
+router.post('/',upload.single('image'), async (req,res)=>{
     try {
         // create product
+        req.body.image = req.file.filename;
         req.body.owner = req.session.user._id;
         const newProduct = await Product.create(req.body);
 
@@ -39,9 +53,10 @@ router.post('/', async (req,res)=>{
 })
 
 // create a new product and redirect to product index
-router.post('/allProducts', async (req,res)=>{
+router.post('/allProducts',upload.single('image'), async (req,res)=>{
     try {
         // create product
+        req.body.image = req.file.filename;
         req.body.owner = req.session.user._id;
         const newProduct = await Product.create(req.body);
 
@@ -63,9 +78,10 @@ router.post('/allProducts', async (req,res)=>{
 // show product by ID
 router.get('/:productId',async (req,res)=>{
     try {
+        const allInventories = await Inventory.find({owner:req.session.user._id});
         const foundProduct = await Product.findById(req.params.productId);
         const foundInventory = await Inventory.find({products:foundProduct._id});
-        res.render("products/show",{product:foundProduct, inventory:foundInventory[0]});
+        res.render("products/show",{product:foundProduct, inventory:foundInventory[0], inventories:allInventories});
     } catch (error) {
         res.redirect('/');
     }

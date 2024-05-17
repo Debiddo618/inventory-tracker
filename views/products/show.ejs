@@ -8,24 +8,67 @@
 </head>
 <body>
     <%- include('../partials/_navbar.ejs') %>
-    <div class="product-details-container">
-        <div class="product-details">
-            <h1>Name: <%= product.name  %></h1>
-            <h1>Description: <%= product.description  %></h1>
-            <h1>Amount: <%= product.amount  %></h1>
-            <h1>Status: <%= product.status  %></h1>
-            <h1>Price: <%= product.price  %></h1>
-            <div class="product-icons">
-                <button class="button edit">
-                    <a href="/products/<%= product._id  %>/edit">
-                        <img class="icon" src="/assets/edit.svg" alt="">
-                    </a>
-                </button>
-                <form action="/products/<%= product._id %>/<%= inventory._id  %>?_method=DELETE" method="POST">
-                    <button class="button delete" type="submit">
-                        <img class="icon" src="/assets/delete.svg" alt="">
-                    </button>
-                </form>
+    <div class="products-grid">
+        <div class="inventories-list">
+            <h1>All Inventories</h1>
+            <% inventories.forEach(inventory => { %>
+                <div class="inventory">
+                    <div class="name-color">
+                        <a href="/inventories/<%= inventory._id  %>">
+                            <div class="color" style="background-color: <%= inventory.color %>"></div>
+                        </a>
+                        <a href="/inventories/<%= inventory._id  %>">
+                            <%= inventory.name  %>
+                        </a>
+                    </div>
+                    <div class="inventory-icons">
+                        <button class="button view">
+                            <a href="/inventories/<%= inventory._id  %>">
+                                <img class="icon" src="/assets/view.svg" alt="">
+                            </a>
+                        </button>
+                        <button class="button edit">
+                            <a href="/inventories/<%= inventory._id  %>/edit">
+                                <img class="icon" src="/assets/edit.svg" alt="">
+                            </a>
+                        </button>
+                        <form action="/inventories/<%= inventory._id %>?_method=DELETE" method="POST">
+                            <button class="button delete" type="submit">
+                                <img class="icon" src="/assets/delete.svg" alt="">
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            <% }) %>
+            <button class="button add-inventory">
+                <a href="/inventories/new">Create New Inventory</a>
+            </button>
+        </div>
+        <div class="product-details-container">
+            <div class="product-image">
+                <img src="/uploads/<%= product.image  %>" alt="">
+            </div>
+            <div class="product-details">
+                <h1>Product Details:</h1>
+                <div class="product-info">
+                    <h1 id="product-name"><%= product.name  %></h1>
+                    <h2>Description: <%= product.description  %></h2>
+                    <h2>Amount: <%= product.amount  %></h2>
+                    <h2>Status: <%= product.status  %></h2>
+                    <h2>Price: <%= product.price  %></h2>
+                    <div class="product-icons">
+                        <button class="button edit">
+                            <a href="/products/<%= product._id  %>/edit">
+                                <img class="icon" src="/assets/edit.svg" alt="">
+                            </a>
+                        </button>
+                        <form action="/products/<%= product._id %>/<%= inventory._id  %>?_method=DELETE" method="POST">
+                            <button class="button delete" type="submit">
+                                <img class="icon" src="/assets/delete.svg" alt="">
+                            </button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -90,7 +90,7 @@
                 <div class="create-product-modal-container">
                     <div class="create-product-modal">
                         <h1>Create New Product</h1>
-                        <form action="/products" method="POST">
+                        <form action="/products" method="POST" enctype="multipart/form-data">
                             <label for="name">Name:</label>
                             <input type="text" id="name" name="name" required>
                             <br>
@@ -115,6 +115,9 @@
                                 <option value="Backordered">Backordered</option>
                                 <option value="Pending Approval">Pending Approval</option>
                             </select>
+                            <br>
+                            <label for="image" class="label-image">Upload Image</label>
+                            <input type="file" name="image" id="image" accept="image/jpeg, image/png">
                             <br>
                             <input type="text" name="inventory" id="inventory" value="<%= inventory._id  %>">
                             <br>

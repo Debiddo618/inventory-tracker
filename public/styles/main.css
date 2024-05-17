@@ -540,7 +540,7 @@ button.button.cancel {
     justify-content: center;
     align-items: center;
     margin: 20px auto;
-    margin-top: -200px;
+    margin-top: -100px;
     gap: 10px;
     padding: 20px 30px;
     border-radius: 1rem;
@@ -588,22 +588,67 @@ input[type="color"] {
 /* Product Detail Page */
 .product-details-container {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 100%;
+    height: 100vh;
+    margin: 0 auto;
 }
 
 .product-details {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 10px;
-    margin: 10px;
     padding: 10px;
-    border-radius: 1rem;
-    box-shadow: 0 0 5px #888888;
+    flex: 2;
+}
+
+.product-details>h1 {
+    font-size: 3rem;
+    font-weight: bold;
 }
 
 .product-icons {
     display: flex;
     gap: 10px;
     width: fit-content;
+}
+
+.product-image {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    flex: 1;
+    overflow: hidden;
+}
+
+.product-image img {
+    width: 500px;
+    height: 500px;
+    border-radius: 1rem;
+    box-shadow: 0 0 5px #888888;
+    margin: 10px;
+}
+
+.product-info {
+    height: 50%;
+    width: 75%;
+    padding: 10px;
+    gap: 10px;
+}
+
+.product-info h2,
+.product-info .product-icons {
+    font-size: 2rem;
+    margin: 10px;
+}
+
+.product-info .product-icons {
+    margin: 0 auto;
+    scale: 1.5;
+}
+
+#product-name {
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 2.5rem;
 }
