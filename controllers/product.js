@@ -37,7 +37,9 @@ router.get('/new', async (req,res)=>{
 router.post('/',upload.single('image'), async (req,res)=>{
     try {
         // create product
-        req.body.image = req.file.filename;
+        if(req.file){
+            req.body.image = req.file.filename;
+        }
         req.body.owner = req.session.user._id;
         const newProduct = await Product.create(req.body);
 
@@ -56,7 +58,9 @@ router.post('/',upload.single('image'), async (req,res)=>{
 router.post('/allProducts',upload.single('image'), async (req,res)=>{
     try {
         // create product
-        req.body.image = req.file.filename;
+        if(req.file){
+            req.body.image = req.file.filename;
+        }
         req.body.owner = req.session.user._id;
         const newProduct = await Product.create(req.body);
 
@@ -101,7 +105,9 @@ router.get('/:productId/edit', async (req,res)=>{
 router.put('/:productId',upload.single('image'), async (req,res)=>{
     try {
         const allInventories = await Inventory.find({owner:req.session.user._id});
-        req.body.image = req.file.filename;
+        if(req.file){
+            req.body.image = req.file.filename;
+        }
         const newProduct = await Product.findByIdAndUpdate(
             req.params.productId,
             req.body,
@@ -117,6 +123,20 @@ router.put('/:productId',upload.single('image'), async (req,res)=>{
 // Delete route
 router.delete('/:productId/:inventoryId', async (req, res) => {
     try {
+        const foundProduct = await Product.findById(req.params.productId);
+
+        // remove the image if the image exists
+        if(foundProduct.image){
+            const filePath = `./public/uploads/${foundProduct.image}`;
+            fs.unlink(filePath, (err) => {
+                if (err) {
+                    console.error('Error deleting file:', err);
+                    res.redirect('/');
+                }
+            })
+        }
+
+
         // remove product from inventory
         const foundInventory = await Inventory.findById(req.params.inventoryId);
         foundInventory.products = foundInventory.products.filter(product => product != req.params.productId);
