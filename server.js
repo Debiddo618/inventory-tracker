@@ -26,7 +26,9 @@ const isSignedIn = require('./middleware/is-signed-in.js');
 const passUserToView = require('./middleware/pass-user-to-view.js');
 
 // using middleware
-app.use(morgan('dev'))
+if (process.env.ON_HEROKU === 'false') {
+  app.use(morgan('dev'))
+}
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: false }))
 app.use(methodOverride('_method'))
