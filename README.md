@@ -12,7 +12,7 @@ This is an inventory management web app made using the MEN (MongoDB, Express, an
 
 ## :computer: Getting Started:
 
-You can access the game by clicking the link [here](n/a).
+You can access the game by clicking the link [here](https://inventorypro-fb27c3245e68.herokuapp.com/).
 
 ## :bust_in_silhouette: Attributions:
 
